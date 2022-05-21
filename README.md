@@ -273,3 +273,70 @@ grep -R -i 'password' /home
 - добавить перед этими символами обратный слеш `\`;  
 - вызвать `grep -E`;  
 - добавить команду `egrep`, которая представляет собой скрипт, вызывающий `grep` как `grep -E`.  
+
+#### Метасимволы
+`.` соответствует любому символу, кроме символа новой строки.  
+`?` делает любой предшествующий ему символ необязательным.  
+`*` соответствует предыдущему элементу неограниченное количество раз.  
+`+` соответствует предыдущему элементу, который должен встретиться хотя бы однажды.  
+`()` символы, расположенные внутри скобок, рассматриваются как один элемент.  
+`|` логический оператор ИЛИ.  
+`[]` предназначены для определения классов и списков допустимых символов.  
+```sh
+# Тестовый файл frost.txt для примеров.
+1    Two roads diverged in a yellow wood,
+2    And sorry I could not travel both
+3    And be one traveler, long I stood
+4    And looked down one as far as I could
+5    To where it bent in the undergrowth;
+6
+7 Excerpt from The Road Not Taken by Robert Frost
+```
+```sh
+grep 'T.o' frost.txt
+# 1    Two roads diverged in a yellow wood,
+
+grep 'T.\?o' frost.txt
+grep -E 'T.?o' frost.txt
+egrep 'T.?o' frost.txt 
+# 1    Two roads diverged in a yellow wood,
+# 5    To where it bent in the undergrowth;
+
+grep 'T.*o' frost.txt
+# 1    Two roads diverged in a yellow wood,
+# 5    To where it bent in the undergrowth;
+# 7 Excerpt from The Road Not Taken by Robert Frost
+
+egrep 'T.+o' frost.txt
+# 1    Two roads diverged in a yellow wood,
+# 5    To where it bent in the undergrowth;
+# 7 Excerpt from The Road Not Taken by Robert Frost
+
+egrep 'And be one (stranger|traveler), long I stood' frost.txt
+# 3    And be one traveler, long I stood
+```
+#### Классы символов
+- `[abc]` Соответствует только символу a, или b, или c.  
+- `[1–5]` Соответствует цифрам в диапазоне от 1 до 5.  
+- `[a–zA–Z]` Соответствует любой строчной или прописной букве от a до z.  
+- `[0–9 +–*/]` Соответствует числам или указанным четырем математическим символам.  
+- `[0–9a–fA–F]` Соответствует шестнадцатеричному символу.   
+- `[1–475]` соответствует любой из цифр (символов) в диапазоне 1–4, или символу 7, или символу 5.  
+
+#### Символьные классы регулярных выражений в скобках
+`[:alnum:]` Любой буквенно-цифровой символ  
+`[:alpha:]` Любой алфавитный символ  
+`[:cntrl:]` Любой управляющий символ  
+`[:digit:]` Любая цифра  
+`[:graph:]` Любой графический символ  
+`[:lower:]` Любой символ нижнего регистра  
+`[:print:]` Любой печатаемый символ  
+`[:punct:]` Любой знак препинания  
+`[:space:]` Любой пробельный символ  
+`[:upper:]` Любой символ верхнего регистра  
+`[:xdigit:]` Любая шестнадцатеричная цифра  
+
+```sh
+# Вывод строк, в которых есть символ `X`, за которым следует любая прописная буква или цифра
+grep 'X[[:upper:][:digit:]]' idlist.txt
+```
