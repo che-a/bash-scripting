@@ -38,3 +38,14 @@ ssh user@myserver ps \> /tmp/ps.out
 ssh user@myserver bash < ./osdetect.sh
 
 ```
+## find
+```sh
+# Поиск файла в директории
+find <директория> -name "<файл>"
+
+# Найти file.txt в домашней директории
+find ~/ -name "file.txt"
+
+# Найти все текстовые файлы в домашней директории
+find ~/ -name "*.txt"
+```
