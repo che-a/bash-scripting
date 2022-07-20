@@ -1,52 +1,61 @@
 # Работа с архивами
 ## Создание архивов
+### zip
 ```sh
-# запаковать перечисленные файлы и/или папки в архив.zip
-zip архив.zip файл1 файл2 ...
+# Создать архив archive.zip из файлов (и/или директорий) file1 file2 ...
+zip archive.zip file1 file2
+```
 
-# запаковать файл в файл.gz, исходный файл удалить
-gzip файл
+### gzip
+```sh
+# Создать архив file.txt.gz со сжатием из одниночного файла file.txt. Исходный файл file.txt будет удалён. 
+gzip file.txt
 
-# запаковать перечисленные файлы
-# и/или папки в архив.tar (без сжатия)
-tar -cvf архив.tar файл1 файл2 ...
+# Упаковать без сжатия перечисленные файлы и/или директории в archive.tar
+tar -cvf archive.tar file1 file2 file3 ...
+# Создать сжатый архив archive.tar.gz из упакованного файла archive.tar, который будет удален
+gzip archive.tar
 
-# запаковать архив.tar в архив.tar.gz,
-# исходный архив.tar удалить
-gzip архив.tar
+# Или то же самое сделать одной командой
+tar -zcvf archive.tar.gz file1 file2 file3 ...
 
-# запаковать перечисленные файлы
-и/или папки в архив.tar.gz (c сжатием
-при помощи gzip)
-tar -zcvf архив.tar.gz файл1 файл2 ...
+# Создание архивов без удаления исходный файлов
+gzip -c file > file.gz
+```
+
+### bzip2
+```sh
+# Создать архив file.txt.bz2 со сжатием из одниночного файла file.txt. Исходный файл file.txt будет удалён. 
+bzip2 file.txt
+
+# Упаковать без сжатия перечисленные файлы и/или директории в archive.tar и создать сжатый архив archive.tar.bz2
+tar -cjvf archive.tar.bz2 file1 file2 file3 ...
+
+# Создание архивов без удаления исходный файлов
+bzip2 -c file > file.bz2
 ```
 
 ## Распаковка архивов
 ```sh
-# распаковать содержимое архива.zip
-unzip архив.zip
+# Распаковка содержимого архива archive.zip
+unzip archive.zip
 
-# распаковать содержимое архива.gz,
-# файл архив.gz удалить
-gunzip архив.gz
+# Распаковка содержимого архива archive.gz (файл archive.gz будет удалён)
+gunzip archive.gz
 
-# распаковать архив.tar
-tar -xvf архив.tar
+# Распаковка архива archive.tar
+tar -xvf archive.tar
 
-# распаковать архив.tar.gz (с использованием gunzip)
-tar -xzvf архив.tar.gz
+# Распаковка архива archive.tar.gz (с использованием gunzip)
+tar -xzvf archive.tar.gz
 
+# Распаковка архива archive.bz2. Исходный архив будет удалён.
+bunzip2 archive.bz2
 
-## Еще один архиватор:
-bzip2 файл
-bunzip2 файл.bz2
-tar -cjvf архив.tar.bz2 файл1 файл2 ...
-tar -xjvf архив.tar.bz2
+# Распаковка архива archive.tar.bz2 (с использованием bzip2)
+tar -xjvf archive.tar.bz2
 
-## Сжатие/распаковка без удаления:
-gzip -c файл > файл.gz
-gunzip -c файл.gz > файл
-bzip2 -c файл > файл.bz2
-bunzip2 -c файл.bz2 > файл
-
+# Распаковка архивов без удаления исходного файла
+gunzip -c file.gz > file
+bunzip2 -c file.bz2 > file
 ```
