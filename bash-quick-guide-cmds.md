@@ -36,8 +36,14 @@ ssh user@myserver ps \> /tmp/ps.out
 
 # Запуск в удаленной системе оболочки `bash` и передача в неё сценария osdetect.sh из локальной системы:
 ssh user@myserver bash < ./osdetect.sh
-
 ```
+
+## scp
+```sh
+# Копирование на удаленный сервер (в домашнюю директорию) каталога stepic вместе с содержимым её самой и всех её подкаталогов
+scp -r stepic username@server:~/
+```
+
 ## find
 ```sh
 # Поиск файла в директории
@@ -48,4 +54,10 @@ find ~/ -name "file.txt"
 
 # Найти все текстовые файлы в домашней директории
 find ~/ -name "*.txt"
+```
+
+## apt-get
+```sh
+# Обновление отдельной программы
+apt-get install --only-upgrade программа
 ```
