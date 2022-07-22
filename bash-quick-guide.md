@@ -214,6 +214,14 @@ do
     let i++
 done
 
+# Бесконечный цикл
+while :
+do
+  echo "Press <CTRL+C> to exit."
+  sleep 1
+done
+ 
+
 # Более сложный цикл while, который выполняет команды как часть своего условия:
 while ls | grep -q pdf
 do
