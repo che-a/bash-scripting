@@ -100,6 +100,12 @@ sed 's/John/Nick/g' file.txt > new.txt
 
 # заменить все слова, которые начинаются на J и кончаются на n на Nick
 sed -r 's/J[a-z]*n/Nick/g' file.txt > new.txt
+```
 
-
+## wc
+```sh
+wc -l file.txt  # Количество строк в файле
+wc -w file.txt  # Количество слов в файле
+wc -m file.txt  # Количество символов в файле
+wc -c file.txt  # Количество байт в файле
 ```
