@@ -23,27 +23,6 @@ file -k index.html
 # index.html: HTML document text\012- HTML document text\012- HTML document text\012- HTML document text\012- exported SGML document, ASCII text
 ```
 
-## ssh
-```sh
-# Выполнение команды в удалённой системе:
-ssh user@myserver ps
-
-# Выполнения команды в удаленной системе и перенаправления вывода в файл в локальной системе:
-ssh user@myserver ps > /tmp/ps.out
-
-# Выполнение команды в удаленной системе и перенаправления вывода в файл в удаленной системе:
-ssh user@myserver ps \> /tmp/ps.out
-
-# Запуск в удаленной системе оболочки `bash` и передача в неё сценария osdetect.sh из локальной системы:
-ssh user@myserver bash < ./osdetect.sh
-```
-
-## scp
-```sh
-# Копирование на удаленный сервер (в домашнюю директорию) каталога stepic вместе с содержимым её самой и всех её подкаталогов
-scp -r stepic username@server:~/
-```
-
 ## find
 ```sh
 # Поиск файла в директории
