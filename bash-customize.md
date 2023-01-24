@@ -49,3 +49,21 @@ PROMPT_COMMAND='history -a'
 set tabsize 4
 set tabstospaces
 ```
+
+```
+apt-get update && apt-get upgrade -y
+
+apt-get install -y \
+curl \
+exa \
+fonts-ubuntu \
+htop \
+lm-sensors \
+mc \
+remmina \
+screenfetch \
+tmux tmux-themepack-jimeh \
+tree \
+vlc
+
+```
