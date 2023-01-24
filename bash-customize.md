@@ -240,3 +240,18 @@ xrandr --addmode $M2 $MODE2_NAME
 xrandr --output $M1 --mode $MODE1_NAME
 # xrandr --output $M2 --mode $MODE2_NAME
 ```
+
+### Запись RTSP-потока в файл
+```
+openRTSP    -4 \
+            -D 1 \
+            -B 10000000 -b 10000000 \
+            -w 1920 -h 1080 \
+            -f $FRAME_RATE \
+            -Q \
+            -d $RECORDING_TIME \
+            -t \
+            -u $LOGIN $PASSWORD \
+            $RTSP_URL > $FILE_RECORD
+
+```
