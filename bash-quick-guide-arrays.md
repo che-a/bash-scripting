@@ -34,3 +34,35 @@ printf "\n"
 Перебор всех элементов:
                 1 two meteor 27 
 ```
+Можем поместить в массив результаты выполнения какой-либо команды:
+```
+dir1
+├── alfa
+└── beta
+dir2
+├── delta
+├── gamma
+└── vega
+```
+
+```sh
+printf "\n\nОбъединение массивов:\\n"
+b1=$(ls ./dir1) 
+printf "%s " ${b1[@]}
+printf "\n"  
+
+b2=$(ls ./dir2)
+printf "%s " ${b2[@]}
+printf "\n" 
+
+b1+=(${b2})
+b1+=(24 02 2022)
+printf "%s " ${b1[@]}
+printf "\n"
+```
+```
+Объединение массивов:
+alfa beta 
+delta gamma vega 
+alfa beta delta gamma vega 24 02 2022 
+```
