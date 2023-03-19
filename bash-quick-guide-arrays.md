@@ -66,3 +66,35 @@ alfa beta
 delta gamma vega 
 alfa beta delta gamma vega 24 02 2022 
 ```
+## Ассоциативные массивы
+```sh
+#!/usr/bin/env bash
+
+declare -A dict
+
+dict[a]="alfa"
+dict[b]="beta"
+dict[d]="delta"
+dict[dp]="double penetration"
+dict[g]="gamma"
+dict[v]="vega" 
+
+echo "Индексы: "${!dict[@]}
+
+printf "\nПеребор элементов ассоциативного массива по ключам:\n"
+for key in ${!dict[@]}; do 
+    printf "  %s:\t%s\n" "$key" "${dict[$key]}"
+done
+```
+```
+Индексы: dp a b d g v
+
+Перебор элементов ассоциативного массива по ключам:
+  dp:   double penetration
+  a:    alfa
+  b:    beta
+  d:    delta
+  g:    gamma
+  v:    vega
+
+```
