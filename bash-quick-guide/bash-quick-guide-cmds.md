@@ -88,3 +88,11 @@ wc -w file.txt  # Количество слов в файле
 wc -m file.txt  # Количество символов в файле
 wc -c file.txt  # Количество байт в файле
 ```
+
+## pwgen
+```sh
+pwgen -y -1 14
+```
+```
+kieji~ph4Ooxai
+```
