@@ -4,7 +4,7 @@ PROGNAME="$(basename "$0")"
 
 usage () {
 	echo ""
-	echo "$PROGNAME: usage: $PROGNAME [-f file | -i]"
+	echo "Usage: ""$PROGNAME"" [-f file | -i]"
 	echo ""
 	return
 }
