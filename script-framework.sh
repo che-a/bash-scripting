@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROGNAME="$(basename "$0")"
+PROGNAME=`basename "${0}"`
 
 usage () {
 	echo ""
