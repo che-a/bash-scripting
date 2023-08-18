@@ -1,3 +1,4 @@
+
 ```
 Барретт Дэниел Джей  
 Linux. Командная строка. Лучшие практики
@@ -222,8 +223,24 @@ cut -f1 grades | sort | uniq -c | sort -nr | head -n1 | cut -c9
 ```
 
 ## Глава 2. Командная оболочка <a name="chapter2"></a>
-
-
+### Вычисление переменных
+```sh
+printenv HOME
+# /home/kaban
+printenv USER 
+# kaban
+echo My name is $USER and my files are in $HOME
+# My name is kaban and my files are in /home/kaban
+```
+Команда `echo` выводит на экран любые аргументы, которые ей передаются.
+```sh
+echo $HOME
+# /home/kaban
+```
+Значение `$HOME` вычисляет командная оболочка перед запуском команды `echo`. С точки зрения `echo` вы набрали:
+```sh
+echo /home/kaban
+```
 
 # Часть 2. Продвинутые навыки <a name="part2"></a>
 
