@@ -5,20 +5,29 @@ Linux. Командная строка. Лучшие практики. 2023
 ## Объединение команд
 ### Каналы
 **Канал (|)** — это механизм межпроцессного взаимодействия в `Unix`, который перенаправляет стандартный вывод одной программы на стандартный вход другой программы.  
-**Конвейр (pipeline)** — командная строка, содержащая каналы.  
-```bash
-ls -l /bin | less
+**Конвейр (pipeline)** — командная строка, содержащая каналы.  Например, `ls -l /bin | less`.  
+
+Ниже представлены файлы для демонстрации действия команд и конвейеров.    
+`animals.txt` (колонки разделены символом табуляции):  
 ```
-Ниже представлен файл `animals.txt` для демонстрации действия команд и конвейеров, в котором колонки разделены символом табуляции:  
+python	Programming Python	2010	Lutz, Mark
+snail	SSH, The Secure Shell	2005	Barrett, Daniel
+alpaca	Intermediate Perl	2012	Schwartz, Randal
+robin	MySQL High Availability	2014	Bell, Charles
+horse	Linux in a Nutshell	2009	Siever, Ellen
+donkey	Cisco IOS in a Nutshell	2005	Boney, James
+oryx	Writing Word Macros	1999	Roman, Steven
 ```
-python  Programming Python      2010    Lutz, Mark
-snail   SSH, The Secure Shell   2005    Barrett, Daniel
-alpaca  Intermediate Perl       2012    Schwartz, Randal
-robin   MySQL High Availability 2014    Bell, Charles
-horse   Linux in a Nutshell     2009    Siever, Ellen
-donkey  Cisco IOS in a Nutshell 2005    Boney, James
-oryx    Writing Word Macros     1999    Roman, Steven
+
+`essay.txt`:  
 ```
+I'm here today to tell you that I
+really love the Perl programming language, which is
+one of my favorites in the world. For years, I liked
+languages such as Perl, Python, PHP, and Ruby
+equally, but now I'm pretty settled on my favorite.
+```
+
 ### wc
 Команда `wc` выводит количество строк, слов и символов в файле.  
 ```sh
@@ -88,20 +97,69 @@ cut -f4 animals.txt | head -n3 | cut -d, -f1
 Команда `grep` печатает строки, соответствующие заданному шаблону.  
 ```sh
 grep Nutshell animals.txt 
-# horse        Linux in a Nutshell        2009        Siever, Ellen
-# donkey        Cisco IOS in a Nutshell        2005        Boney, James
+#  horse	Linux in a Nutshell	2009	Siever, Ellen
+#  donkey	Cisco IOS in a Nutshell	2005	Boney, James
 
-# Печать строк, не соответствующих шаблону
-grep -v Nutshell animals.txt 
-# python	Programming Python	2010	Lutz, Mark
-# snail	  SSH, The Secure Shell	2005	Barrett, Daniel
-# alpaca	Intermediate Perl	2012	Schwartz, Randal
-# robin	  MySQL High Availability	2014	Bell, Charles
-# oryx	  Writing Word Macros	1999	Roman, Steven
+grep -v Nutshell animals.txt	# Строки, не соответствующие шаблону
+#   python	Programming Python	2010	Lutz, Mark
+#   snail	SSH, The Secure Shell	2005	Barrett, Daniel
+#   alpaca	Intermediate Perl	2012	Schwartz, Randal
+#   robin	MySQL High Availability	2014	Bell, Charles
+#   oryx	Writing Word Macros	1999	Roman, Steven
 
+# Печать строк, содержащих текст Perl, в файлах с расширением .txt
+grep Perl *.txt
+# animals.txt:alpaca	Intermediate Perl	2012	Schwartz, Randal
+# essay.txt:really love the Perl programming language, which is
+# essay.txt:languages such as Perl, Python, PHP, and Ruby
+
+# Кол-во подкаталогов в каталоге /usr/lib
+# ls -l помечает каталоги буквой d — эти строки и будем считать
+ls -l /usr/lib | cut -c1 | grep d | wc -l
+# 138
 ```
 
 ### sort
+Команда `sort` сортирует строки файла в порядке возрастания (по умолчанию):  
+```sh
+sort animals.txt 
+#   alpaca	Intermediate Perl	2012	Schwartz, Randal
+#   donkey	Cisco IOS in a Nutshell	2005	Boney, James
+#   horse	Linux in a Nutshell	2009	Siever, Ellen
+#   oryx	Writing Word Macros	1999	Roman, Steven
+#   python	Programming Python	2010	Lutz, Mark
+#   robin	MySQL High Availability	2014	Bell, Charles
+#   snail	SSH, The Secure Shell	2005	Barrett, Daniel
+
+sort -r animals.txt	# Сортировка строк в порядке убывания
+#   snail	SSH, The Secure Shell	2005	Barrett, Daniel
+#   robin	MySQL High Availability	2014	Bell, Charles
+#   python	Programming Python	2010	Lutz, Mark
+#   oryx	Writing Word Macros	1999	Roman, Steven
+#   horse	Linux in a Nutshell	2009	Siever, Ellen
+#   donkey	Cisco IOS in a Nutshell	2005	Boney, James
+#   alpaca	Intermediate Perl	2012	Schwartz, Randal
+
+cat nums.txt 
+# 0099
+# 000200
+# 100
+
+sort nums.txt 	# Сортировка строк в алфавитном порядке
+# 000200
+# 0099
+# 100
+
+sort -n nums.txt # Сортировка строк в числовом порядке
+# 0099
+# 100
+# 000200
+
+# Год выхода самой новой книги в animals.txt
+cut -f3 animals.txt | sort -nr | head -n1
+# 2014
+
+```
 
 ### uniq
 
