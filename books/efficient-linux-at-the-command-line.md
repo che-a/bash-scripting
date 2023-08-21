@@ -19,6 +19,8 @@ Linux. Командная строка. Лучшие практики
     - [Вычисление переменных](#vars)
     - [Псевнодимы](#alias)
     - [Перенаправление ввода и вывода](#redirection)
+    - [Отключение вычисления с помощью кавычек и экранирования](#disable_eval)
+    - [Расположение исполняемых программ](#path)
 + [Часть 2. Продвинутые навыки](#part2)  
 + [Часть 3. Дополнительные плюсы](#part3)
 
@@ -268,6 +270,10 @@ alias    # Вывод всех псевдонимов и их значений
 alias g  # Вывод конкретного псевдонима
 
 unalias g  # Удаление псевдонима
+
+alias less="less -c"  # Определение псевдонима
+less myfile           # Запуск псевдонима
+\less myflie          # Запуск стандартной команды less
 ```
 
 ### Перенаправление ввода и вывода <a name="redirection"></a>
@@ -279,6 +285,66 @@ grep Perl animals.txt >> outfile   # Добавление записи в кон
 wc animals.txt            # Чтение из файла
 wc < animals.txt          # Чтение из перенаправленного ввода
 wc < animals.txt > count  # Чтение из перенаправленного ввода и перенаправление вывода в файл
+
+grep Perl < animals.txt | wc > count
+cat count 
+#      1       6      47
+```
+Команды Linux могут создавать более одного потока вывода. 
+Стандартные потоки:
+- `stdin`, стандартный поток ввода,
+- `stdout`, стандартный поток вывода,
+- `stderr`, стандартный поток ошибок.
+
+```sh
+# Перенаправление вывода ошибок в файл.
+cp nonexistent.txt file.txt 2> errors
+cat errors 
+# cp: не удалось выполнить stat для 'nonexistent.txt': Нет такого файла или каталога
+
+# Перенаправление обоих потоков `stdout` и `stderr` в один файл
+echo This file exists > goodfile.txt
+cat goodfile.txt nonexistent.txt &> all.output
+cat all.output 
+# This file exists
+# cat: nonexistent.txt: Нет такого файла или каталога
+```
+### Отключение вычисления с помощью кавычек и экранирования <a name="disable_eval"></a>
+Обычно оболочка использует пробелы в качестве разделителей между словами.  
+Чтобы заставить оболочку рассматривать пробелы как часть имени файла, есть три варианта:
+- одинарные кавычки `' '` сообщают командной оболочке, что каждый символ в командной строке следует обрабатывать буквально, даже если он имеет особое значение для оболочки.
+- двойные кавычки `" "` указывают оболочке воспринимать все символы буквально, за исключением $ и некоторых других.
+- обратная косая черта ` \ `, также называемая экранирующим символом, указывает оболочке буквально воспринимать символ, находящийся после неё.
+
+```sh
+echo \$HOME
+# $HOME
+
+echo "The value of \$HOME is $HOME"
+# The value of $HOME is /home/kaban
+
+of \$HOME is $HOME'
+# The value of \$HOME is $HOME
+
+echo "This message is \"sort of\" interesting"
+# This message is "sort of" interesting
+
+echo "This is very long message that needs to extend \
+onto multiple lines"
+# This is very long message that needs to extend onto multiple lines
+```
+#### Расположение исполняемых программ <a name="path"></a>
+`PATH` -- переменная, значение которой содержит список путей для поиска исполняемых программ.  
+```sh
+echo $PATH 
+/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+
+echo $PATH | tr : "\n"
+/usr/local/bin
+/usr/bin
+/bin
+/usr/local/games
+/usr/games
 ```
 
 # Часть 2. Продвинутые навыки <a name="part2"></a>
