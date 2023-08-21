@@ -238,22 +238,22 @@ cut -f1 grades | sort | uniq -c | sort -nr | head -n1 | cut -c9
 `[]` — соответствует одному из символов набора.  
 
 ### Вычисление переменных <a name="vars"></a>
+Предопределенные переменные традиционно записываются большими буквами.  
+`printenv` — печать всех или конкретных переменных окружения.  
 ```sh
 printenv HOME
 # /home/kaban
-
 printenv USER 
 # kaban
-
-echo My name is $USER and my files are in $HOME
-# My name is kaban and my files are in /home/kaban
 ```
 Команда `echo` выводит на экран любые аргументы, которые ей передаются.
 ```sh
 echo $HOME
 # /home/kaban
+echo My name is $USER and my files are in $HOME
+# My name is kaban and my files are in /home/kaban
 ```
-Значение `$HOME` вычисляет командная оболочка перед запуском команды `echo`. С точки зрения `echo` вы набрали:
+Значение `$HOME` вычисляет командная оболочка перед запуском команды `echo`. С точки зрения `echo` была набрана команда:
 ```sh
 echo /home/kaban
 ```
