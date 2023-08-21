@@ -134,7 +134,7 @@ grep -v Nutshell animals.txt	# Строки, не соответствующие
 #   oryx	Writing Word Macros	1999	Roman, Steven
 
 grep -w a animals.txt  # Совпадение обязательно с целым словом
-# horse	Linux in a Nutshell	2009	Siever, Ellen
+# horse		Linux in a Nutshell	2009	Siever, Ellen
 # donkey	Cisco IOS in a Nutshell	2005	Boney, James
 
 # Печать строк, содержащих текст Perl, в файлах с расширением .txt
