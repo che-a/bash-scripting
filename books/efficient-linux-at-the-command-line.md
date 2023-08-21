@@ -133,6 +133,10 @@ grep -v Nutshell animals.txt	# Строки, не соответствующие
 #   robin	MySQL High Availability	2014	Bell, Charles
 #   oryx	Writing Word Macros	1999	Roman, Steven
 
+grep -w a animals.txt  # Совпадение обязательно с целым словом
+# horse	Linux in a Nutshell	2009	Siever, Ellen
+# donkey	Cisco IOS in a Nutshell	2005	Boney, James
+
 # Печать строк, содержащих текст Perl, в файлах с расширением .txt
 grep Perl *.txt
 # animals.txt:alpaca	Intermediate Perl	2012	Schwartz, Randal
