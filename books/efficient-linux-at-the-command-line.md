@@ -31,6 +31,7 @@ Linux. Командная строка. Лучшие практики
     - [Расширение команд с помощью фигурных скобок](#curly_brackets)
     - [`find`](#find)
     - [`yes`](#yes)
+    - [`grep`. Более глубокий взгляд](#grep_ext)
 + [Часть 3. Дополнительные плюсы](#part3)
 
 
@@ -543,7 +544,20 @@ find /etc -type f -name "a*.conf" -exec echo @ {} @ ";" 2> /dev/null | sort | he
 # @ /etc/apache2/mods-available/autoindex.conf @
 ```
 ### `yes` <a name="yes"></a>
+Команда `yes` выводит одну и ту же строку снова и снова, пока вы ее не остановите:
+```sh
+yes
+# y
+# y
+# y
+# y^C
 
+yes 234 | head -n3
+# 234
+# 234
+# 234
+```
+### `grep`. Более глубокий взгляд <a name="grep_ext"></a>
 
 
 # Часть 3. Дополнительные плюсы <a name="part3"></a>
