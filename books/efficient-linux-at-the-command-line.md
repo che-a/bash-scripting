@@ -29,6 +29,8 @@ Linux. Командная строка. Лучшие практики
     - [`date`](#date)
     - [`seq`](#seq)
     - [Расширение команд с помощью фигурных скобок](#curly_brackets)
+    - [`find`](#find)
+    - [`yes`](#yes)
 + [Часть 3. Дополнительные плюсы](#part3)
 
 
@@ -499,6 +501,50 @@ echo {A..Z} | tr ' ' '\n'
 # ⋮
 # Z
 ```
+### `find` <a name="find"></a>
+Команда `find` рекурсивно выводит список файлов в каталоге, спускаясь по подкаталогам и выводя полные пути. Результаты выводятся не в алфавитном порядке (при необходимости нужно использовать `sort` ):
+```sh
+find . -print
+# .
+# ./letters.txt
+# ./nums.txt
+# ./essay.txt
+# ./grades.txt
+# ./animals.txt
+
+# Вывод только каталогов
+find . -type d -print  
+
+# Вывод только файлов
+find . -type f -print  
+
+find /etc/ -type f -name "*.conf" -print | sort | head -n5
+# /etc/adduser.conf
+# /etc/apache2/apache2.conf
+# /etc/apache2/conf-available/charset.conf
+# /etc/apache2/conf-available/javascript-common.conf
+# /etc/apache2/conf-available/localized-error-pages.conf
+```
+`find` также может выполнить команду `Linux` для всех файлов в выходных данных, используя `-exec`.  
+```sh
+find /etc -type f -name "a*.conf" -print 2> /dev/null | sort | head -n5
+# /etc/adduser.conf
+# /etc/apache2/apache2.conf
+# /etc/apache2/mods-available/actions.conf
+# /etc/apache2/mods-available/alias.conf
+# /etc/apache2/mods-available/autoindex.conf
+
+# Пример вывода символа @ по обеим сторонам пути к файлу:
+find /etc -type f -name "a*.conf" -exec echo @ {} @ ";" 2> /dev/null | sort | head -n5
+# @ /etc/adduser.conf @
+# @ /etc/apache2/apache2.conf @
+# @ /etc/apache2/mods-available/actions.conf @
+# @ /etc/apache2/mods-available/alias.conf @
+# @ /etc/apache2/mods-available/autoindex.conf @
+```
+### `yes` <a name="yes"></a>
+
+
 
 # Часть 3. Дополнительные плюсы <a name="part3"></a>
 
