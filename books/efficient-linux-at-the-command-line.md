@@ -146,6 +146,9 @@ grep -w a animals.txt  # Совпадение обязательно с целы
 # horse		Linux in a Nutshell	2009	Siever, Ellen
 # donkey	Cisco IOS in a Nutshell	2005	Boney, James
 
+# Поиск без учета регистра
+grep -i his animals.txt
+
 # Печать строк, содержащих текст Perl, в файлах с расширением .txt
 grep Perl *.txt
 # animals.txt:alpaca	Intermediate Perl	2012	Schwartz, Randal
