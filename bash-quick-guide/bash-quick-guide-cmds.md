@@ -93,6 +93,12 @@ wc -c file.txt  # Количество байт в файле
 ```sh
 pwgen -y -1 14
 ```
+
+## mktemp
+Создание временного файла или каталога
+```sh
+mktemp
 ```
-kieji~ph4Ooxai
+```
+/tmp/kieji~ph4Ooxai
 ```
